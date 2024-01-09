@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\PinnedArticleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,3 +19,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get("/",[ArticleController::class, "fetchArticle"]);
+Route::post("/pin", [PinnedArticleController::class, 'addArticle'])->name('add.article');

@@ -22,4 +22,6 @@ class PinnedArticle extends Model
         'url',
         'api_url',
     ];
+
+    public $timestamps = false;
 }

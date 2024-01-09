@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\PinnedArticleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
