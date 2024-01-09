@@ -20,3 +20,4 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 Route::get("/",[ArticleController::class, "fetchArticle"]);
+Route::delete("/pin", [PinnedArticleController::class, 'delete']);

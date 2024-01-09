@@ -8,10 +8,6 @@ use Illuminate\Support\Facades\Session;
 
 class PinnedArticleController extends Controller
 {
-    public function get(){
-        $pinned = PinnedArticle::paginate(10);
-    }
-
     public function addArticle(Request $request){
 
         $pinnedArticle = PinnedArticle::where('article_id','=',$request->id)->first();
@@ -29,6 +25,26 @@ class PinnedArticleController extends Controller
             ]);
 
             Session::flash('success', 'Article pinned successfully');
+
+            return redirect()->back();
+        }
+    }
+
+    public function delete(){
+       PinnedArticle::truncate();
+    }
+
+    public function unpinArticle(Request $request){
+      
+        $pinnedArticle = PinnedArticle::where('id','=',$request->id)->first();
+        
+        if(!$pinnedArticle){
+            Session::flash('error', 'Article not found!');
+
+            return redirect()->back();  
+        }else{
+            $pinnedArticle->delete();
+            Session::flash('success', 'Article unpinned!');
 
             return redirect()->back();
         }

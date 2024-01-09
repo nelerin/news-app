@@ -20,3 +20,5 @@ Route::get('/', function () {
 });
 Route::get("/",[ArticleController::class, "fetchArticle"]);
 Route::post("/pin", [PinnedArticleController::class, 'addArticle'])->name('add.article');
+Route::get("/pin", [PinnedArticleController::class, 'getPinnedArticles'])->name('get.article');
+Route::delete("/pin", [PinnedArticleController::class, 'unpinArticle'])->name('delete.article');
