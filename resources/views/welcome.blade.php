@@ -856,7 +856,22 @@
             }, 5000);
         </script>
     @endif
+    @if ($errors->any())
+        <div id="errorMessage"
+            class="text-center text-red-500 font-bold text-xl bg-white shadow-lg h-20 absolute w-80 flex items-center justify-center top-4 rounded-lg">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
 
+        <script>
+            setTimeout(function() {
+                document.getElementById('errorMessage').style.display = 'none';
+            }, 5000);
+        </script>
+    @endif
     <div class="flex flex-col items-center justify-center mx-4 font-mon my-10 w-full px-10">
 
         {{-- ARTICLE LIST --}}
@@ -888,6 +903,7 @@
                                     </span>
                                 </button>
                             </form>
+
                             <h1 class="font-bold text-xl text-center">{{ $article['webTitle'] }}</h1>
                             <a class="text-indigo-700 text-sm block overflow-hidden mt-4"
                                 href="{{ $article['webUrl'] }}" style="word-wrap: break-word;">{{ $article['webUrl'] }}

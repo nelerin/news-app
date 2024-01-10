@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePinnedArticle;
 use App\Models\PinnedArticle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -27,26 +28,24 @@ class PinnedArticleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorePinnedArticle $request)
     {
-        $pinnedArticle = PinnedArticle::where('article_id', '=', $request->id)->first();
+        try {
+            $validated = $request->validated();
 
-        if ($pinnedArticle) {
-            Session::flash('error', 'You have already pinned this article!');
-
-            return redirect()->back();
-        } else {
             PinnedArticle::create([
-                'article_id' => $request->id,
-                'publication_date' => $request->webPublicationDate,
-                'title' => $request->articleTitle,
-                'url' => $request->webUrl
+                'article_id' => $validated['id'],
+                'publication_date' => $validated['webPublicationDate'],
+                'title' => $validated['articleTitle'],
+                'url' => $validated['webUrl'],
             ]);
 
             Session::flash('success', 'Article pinned successfully');
-
-            return redirect()->back();
+        } catch (\Exception $e) {
+            Session::flash('error', $e);
         }
+
+        return redirect()->back();
     }
 
     /**
