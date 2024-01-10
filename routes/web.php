@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get("/",[ArticleController::class, "fetchArticle"]);
-Route::post("/pin", [PinnedArticleController::class, 'addArticle'])->name('add.article');
+Route::get("/", [ArticleController::class, "fetchArticle"]);
+Route::post("/pin", [PinnedArticleController::class, 'pinArticle'])->name('pin.article');
 Route::get("/pin", [PinnedArticleController::class, 'getPinnedArticles'])->name('get.article');
 Route::delete("/pin", [PinnedArticleController::class, 'unpinArticle'])->name('delete.article');

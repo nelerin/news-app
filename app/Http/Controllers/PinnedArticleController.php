@@ -8,16 +8,17 @@ use Illuminate\Support\Facades\Session;
 
 class PinnedArticleController extends Controller
 {
-    public function addArticle(Request $request){
+    public function pinArticle(Request $request)
+    {
 
-        $pinnedArticle = PinnedArticle::where('article_id','=',$request->id)->first();
+        $pinnedArticle = PinnedArticle::where('article_id', '=', $request->id)->first();
 
-        if($pinnedArticle){
+        if ($pinnedArticle) {
             Session::flash('error', 'You have already pinned this article!');
 
-             return redirect()->back();  
-        }else{
-           PinnedArticle::create([
+            return redirect()->back();
+        } else {
+            PinnedArticle::create([
                 'article_id' => $request->id,
                 'publication_date' => $request->webPublicationDate,
                 'title' => $request->articleTitle,
@@ -30,19 +31,16 @@ class PinnedArticleController extends Controller
         }
     }
 
-    public function delete(){
-       PinnedArticle::truncate();
-    }
+    public function unpinArticle(Request $request)
+    {
 
-    public function unpinArticle(Request $request){
-      
-        $pinnedArticle = PinnedArticle::where('id','=',$request->id)->first();
-        
-        if(!$pinnedArticle){
+        $pinnedArticle = PinnedArticle::where('id', '=', $request->id)->first();
+
+        if (!$pinnedArticle) {
             Session::flash('error', 'Article not found!');
 
-            return redirect()->back();  
-        }else{
+            return redirect()->back();
+        } else {
             $pinnedArticle->delete();
             Session::flash('success', 'Article unpinned!');
 
