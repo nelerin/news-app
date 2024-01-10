@@ -863,7 +863,7 @@
         <div class='w-full h-44 flex items-start justify-center bg-error shadow-lg flex-col bg-white px-4 rounded-l'>
             <h1 class="font-bold text-3xl">Article Search</h1>
             <form method=get action="/" class="w-full flex items-center justify-center h-1/2">
-                <input type="search" id="search" placeholder="Search Article..." name="search"
+                <input type="search" id="search" placeholder="Search Article..." name="search" required
                     class="w-full h-14 rounded-lg p-2 border-2 border-blue-500 outline-none">
                 <input type="hidden" name="page" value="1">
             </form>
