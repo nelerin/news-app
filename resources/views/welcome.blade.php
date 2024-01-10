@@ -870,11 +870,9 @@
         </div>
         <div class='w-full  flex mx-4 flex-col h-full gap-4 items-center justify-center my-4'>
             @if (isset($articles) && count($articles) > 0)
-
-                @foreach ($articles as $article)
-                    <div class="w-full h-28 bg-white p-4 rounded-lg shadow-lg">
-                        <div class="flex flex-row">
-                            <h1 class="font-bold text-xl">{{ $article['webTitle'] }}</h1>
+                <div class="flex flex-row justify-center items-center flex-wrap gap-4">
+                    @foreach ($articles as $article)
+                        <div class="w-80 h-96 bg-white p-4 rounded-lg shadow-lg flex flex-col">
                             <form method="POST"
                                 action="{{ route('pin.article', [
                                     'articleTitle' => $article['webTitle'],
@@ -890,14 +888,17 @@
                                     </span>
                                 </button>
                             </form>
+                            <h1 class="font-bold text-xl text-center">{{ $article['webTitle'] }}</h1>
+                            <a class="text-indigo-700 text-sm block overflow-hidden mt-4"
+                                href="{{ $article['webUrl'] }}" style="word-wrap: break-word;">{{ $article['webUrl'] }}
+                            </a>
+                            @php
+                                $formattedDate = date('d/m/Y', strtotime($article['webPublicationDate']));
+                            @endphp
+                            <p class="mt-auto ml-auto">{{ $formattedDate }}</p>
                         </div>
-                        <a class="text-indigo-700" href="{{ $article['webUrl'] }}">{{ $article['webUrl'] }}</a>
-                        @php
-                            $formattedDate = date('d/m/Y', strtotime($article['webPublicationDate']));
-                        @endphp
-                        <p>{{ $formattedDate }}</p>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
             @elseif (isset($error))
                 <h1 class="text-black font-bold text-4xl">Something went wrong!</h1>
             @else
@@ -909,7 +910,7 @@
                 <div class="flex flex-row gap-4 my-10">
                     @if ($apiResponse['pages'] > 1)
                         @php
-                            $visiblePages = 5; 
+                            $visiblePages = 5;
                             $start = max(1, $apiResponse['currentPage'] - floor($visiblePages / 2));
                             $end = min($start + $visiblePages - 1, $apiResponse['pages']);
                         @endphp
