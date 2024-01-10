@@ -3,28 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\PinnedArticle;
-use App\Services\ArticleService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
 class ArticleController extends Controller
 {
-    protected $articleProxy;
-
-    public function __construct(ArticleService $articleProxy)
-    {
-        $this->articleProxy = $articleProxy;
-    }
-
-    public function fetchArticle(Request $request)
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(Request $request)
     {
         $pinnedArticles = PinnedArticle::get();
+        $guardianApiKey = env('GUARDIAN_KEY');
+        $guaradianEndPoint = env('GUARDIAN_END_POINT');
 
         try {
-            $response = $this->articleProxy->fetchArticles(
-                $request->search,
-                $request->page
-            );
+            $response = Http::get($guaradianEndPoint, [
+                'q' => $request->search,
+                'api-key' => $guardianApiKey,
+                'page' => $request->page
+            ]);
             $apiResponse = $response['response'];
             $articles = $response['response']['results'];
             $page = $request->page;
@@ -34,5 +32,53 @@ class ArticleController extends Controller
             $error = 'Something went wrong!';
             return view('welcome', compact('error'));
         }
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
     }
 }

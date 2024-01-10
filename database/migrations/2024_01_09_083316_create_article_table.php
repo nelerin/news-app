@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->string('url')->nullable();
             $table->string('api_url')->nullable();
+            $table->timestamps();
         });
     }
 

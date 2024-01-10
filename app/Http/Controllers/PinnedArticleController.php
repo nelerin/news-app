@@ -8,9 +8,27 @@ use Illuminate\Support\Facades\Session;
 
 class PinnedArticleController extends Controller
 {
-    public function pinArticle(Request $request)
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
     {
+        //
+    }
 
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
         $pinnedArticle = PinnedArticle::where('article_id', '=', $request->id)->first();
 
         if ($pinnedArticle) {
@@ -31,10 +49,36 @@ class PinnedArticleController extends Controller
         }
     }
 
-    public function unpinArticle(Request $request)
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
     {
+        //
+    }
 
-        $pinnedArticle = PinnedArticle::where('id', '=', $request->id)->first();
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        $pinnedArticle = PinnedArticle::where('id', '=', $id)->first();
 
         if (!$pinnedArticle) {
             Session::flash('error', 'Article not found!');

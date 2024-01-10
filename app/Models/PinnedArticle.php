@@ -13,7 +13,7 @@ class PinnedArticle extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-       'article_id',
+        'article_id',
         'type',
         'section_id',
         'section_name',

@@ -874,7 +874,7 @@
                     @foreach ($articles as $article)
                         <div class="w-80 h-96 bg-white p-4 rounded-lg shadow-lg flex flex-col">
                             <form method="POST"
-                                action="{{ route('pin.article', [
+                                action="{{ route('pin.store', [
                                     'articleTitle' => $article['webTitle'],
                                     'webUrl' => $article['webUrl'],
                                     'webPublicationDate' => $article['webPublicationDate'],
@@ -950,8 +950,8 @@
                         <div
                             class="w-80 h-60 bg-white border border-grey-100 shadow-xl flex flex-col items-center justify-start p-4 rounded-lg">
                             <form method="POST"
-                                action="{{ route('delete.article', [
-                                    'id' => $article->id,
+                                action="{{ route('pin.destroy', [
+                                    'pin' => $article->id,
                                 ]) }}"
                                 class="ml-auto">
                                 @csrf
