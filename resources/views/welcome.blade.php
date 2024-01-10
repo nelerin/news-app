@@ -870,7 +870,7 @@
         </div>
         <div class='w-full  flex mx-4 flex-col h-full gap-4 items-center justify-center my-4'>
             @if (isset($articles) && count($articles) > 0)
-                <div class="flex flex-row justify-center items-center flex-wrap gap-4">
+                <div class="flex flex-row justify-between items-center flex-wrap gap-4">
                     @foreach ($articles as $article)
                         <div class="w-80 h-96 bg-white p-4 rounded-lg shadow-lg flex flex-col">
                             <form method="POST"
