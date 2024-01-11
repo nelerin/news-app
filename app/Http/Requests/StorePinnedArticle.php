@@ -22,9 +22,6 @@ class StorePinnedArticle extends FormRequest
      */
     public function rules(): array
     {
-        $messages = [
-            'id.unique' => 'Article is already pinned!',
-        ];
         return [
             'id' => 'required|unique:App\Models\PinnedArticle,article_id',
             'webPublicationDate' => 'required',
