@@ -14,8 +14,8 @@ class ArticleController extends Controller
     public function index(Request $request)
     {
         $pinnedArticles = PinnedArticle::get();
-        $guardianApiKey = env('GUARDIAN_KEY');
-        $guaradianEndPoint = env('GUARDIAN_END_POINT');
+        $guardianApiKey = config('guardian.key');
+        $guaradianEndPoint = config('guardian.end_point');
 
         try {
             $response = Http::get($guaradianEndPoint, [
